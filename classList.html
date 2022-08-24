@@ -33,22 +33,6 @@
         </form>
       </div>
     </div>
-
-    <script>
-      
-      $('form').on('submit', function(e){
-        var id = document.getElementById('email').value;
-        var pw = document.getElementById('pw').value;
-        if (id == '' || pw == ''){
-          alert('아이디를 입력해 주세요.')
-          e.preventDefault();
-        }
-        if (pw.length < 6) {
-          alert('비밀번호는 6자 이상으로 입력해주세요.')
-        }
-      })
-
-    </script>
     
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
@@ -60,11 +44,11 @@
     </nav>
 
     <ul class="list-group">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
-      <li class="list-group-item">A fourth item</li>
-      <li class="list-group-item">And a fifth one</li>
+      <li class="list-group-item">주문내역</li>
+      <li class="list-group-item">상의</li>
+      <li class="list-group-item">바지</li>
+      <li class="list-group-item">치마/원피스</li>
+      <li class="list-group-item">악세서리</li>
     </ul> 
     
     <div class="main-bg">
@@ -72,7 +56,53 @@
       <button class="btn btn-info" id="login">로그인</button>
     </div>
 
+    <div class="alert alert-danger">
+      <span id="num">5</span>초 이내 구매시 사은품 증정!
+    </div>
+
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1.png">
+        </div>
+        <div class="slide-box">
+          <img src="car2.png">
+        </div>
+        <div class="slide-box">
+          <img src="car3.png">
+        </div>
+      </div>
+    </div>
+
+    <button id="pre">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button id="next">다음</button>
+
+
     <script>
+
+      $('form').on('submit', function(e){
+        var id = document.getElementById('email').value;
+        var pw = document.getElementById('pw').value;
+        if (id == '' || pw == ''){
+          alert('아이디와 비밀번호를 모두 입력해 주세요.')
+          e.preventDefault();
+        }
+        else if (/\S+@\S+\.\S+/.test(id) == false){
+          alert('아이디는 이메일 형식으로 입력해주세요.')
+          e.preventDefault();
+        }
+        else if (id != '' && pw.length < 6){
+          alert('비밀번호는 6자 이상으로 입력해주세요.')
+          e.preventDefault();
+        }
+        else if (/[A-Z]/.test(pw) == false){
+          alert('비밀번호에 영어 대문자가 포함되어야 합니다.')
+          e.preventDefault();
+        }
+      })
 
       $('#login').on('click', function(){
         $('.black-bg').addClass('show-modal');
@@ -85,6 +115,47 @@
       document.querySelector(".navbar-toggler").addEventListener('click', function(){
         document.querySelectorAll(".list-group")[0].classList.toggle('show');
       })
+
+      var count = 5;
+      var 타이머 = setInterval(function(){
+          count -= 1;
+          if(count <= 0 ) {
+            $('.alert').hide();
+            clearTimeout(타이머)
+          }
+          else {
+            // $('#num').html = count;
+            document.querySelector('#num').innerHTML = count;
+          }
+
+        }, 1000)
+
+        var 지금사진 = 1;
+
+        $('.slide-1').on('click', function(){
+          $('.slide-container').css('transform', 'translateX(0vw)');
+          지금사진 = 1;
+        })
+
+        $('.slide-2').on('click', function(){
+          $('.slide-container').css('transform', 'translateX(-100vw)');
+          지금사진 = 2;
+        })
+
+        $('.slide-3').on('click', function(){
+          $('.slide-container').css('transform', 'translateX(-200vw)');
+          지금사진 = 3;
+        })
+
+        $('#next').on('click', function(){
+          $('.slide-container').css('transform', 'translateX(-' + 지금사진 + '00vw)');
+          지금사진 += 1;
+        })
+
+        $('#pre').on('click', function(){
+            지금사진 -= 1;
+            $('.slide-container').css('transform', 'translateX(-' + (지금사진-1) + '00vw)');
+        })
 
     </script>
 
