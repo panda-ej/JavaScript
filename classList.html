@@ -17,6 +17,8 @@
     </script>
   </head>
   <body>
+
+    <div class="progress-bar"></div>
     
     <div class="black-bg">
       <div class="white-bg">
@@ -36,7 +38,7 @@
     
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand">JS Smart Store</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -55,6 +57,8 @@
       <h4>Shirts on Sale</h4>
       <button class="btn btn-info" id="login">로그인</button>
     </div>
+
+    <div style="height: 5000px"></div>
 
     <div class="alert alert-danger">
       <span id="num">5</span>초 이내 구매시 사은품 증정!
@@ -79,6 +83,13 @@
     <button class="slide-2">2</button>
     <button class="slide-3">3</button>
     <button id="next">다음</button>
+
+    <div id="lorem" style="width: 200px; height: 100px; overflow-y: scroll;">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+      Quae voluptas voluptatum minus praesentium fugit debitis at, 
+      laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, 
+      eligendi quae consectetur praesentium exercitationem.
+    </div>
 
 
     <script>
@@ -155,6 +166,30 @@
         $('#pre').on('click', function(){
             지금사진 -= 1;
             $('.slide-container').css('transform', 'translateX(-' + (지금사진-1) + '00vw)');
+        })
+
+        $(window).on('scroll', function(){
+          var scroll = $(window).scrollTop()
+          if (scroll > 100) {
+            $('.navbar-brand').css('font-size', '20px');
+          } else { $('.navbar-brand').css('font-size', '30px'); }
+        })
+
+        $('#lorem').on('scroll', function(){
+          var 스크롤위치 = ($('#lorem').scrollTop()) + (document.querySelector('#lorem').clientHeight);
+          var div높이 = document.querySelector('#lorem').scrollHeight;
+          if (스크롤위치 >= div높이) {
+            alert("이용약관을 다 읽으셨습니다.")
+          }
+        })
+
+        $(window).on('scroll', function(){
+          var 스크롤길이 = $(window).scrollTop();
+          var 보이는길이 = document.querySelector('html').clientHeight;
+          var 페이지길이 = document.querySelector('html').scrollHeight;
+          var 페이지비율 = ((스크롤길이+보이는길이)/페이지길이) * 100;
+          $('.progress-bar').css('width',  (페이지비율).toFixed(1) + '%');
+          console.log((페이지비율).toFixed(1))
         })
 
     </script>
