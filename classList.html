@@ -38,12 +38,14 @@
     
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">JS Smart Store</span>
+        <span class="navbar-brand">은정이 Store</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </nav>
+
+    <div id = "padding-top" style="padding-top: 75px;"></div>
 
     <ul class="list-group">
       <li class="list-group-item">주문내역</li>
@@ -52,7 +54,7 @@
       <li class="list-group-item">치마/원피스</li>
       <li class="list-group-item">악세서리</li>
     </ul> 
-    
+
     <div class="main-bg">
       <h4>Shirts on Sale</h4>
       <button class="btn btn-info" id="login">로그인</button>
@@ -190,6 +192,12 @@
           var 페이지비율 = ((스크롤길이+보이는길이)/페이지길이) * 100;
           $('.progress-bar').css('width',  (페이지비율).toFixed(1) + '%');
           console.log((페이지비율).toFixed(1))
+        })
+
+        $('.black-bg').on('click', function(e){
+          if (e.target == document.querySelector('.black-bg')) {
+            $('.black-bg').removeClass('show-modal');
+          }
         })
 
     </script>
